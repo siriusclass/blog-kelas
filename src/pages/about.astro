@@ -1,0 +1,29 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import Container from '@/components/Container.astro'
+import { SITE } from '@/consts'
+import Layout from '@/layouts/Layout.astro'
+---
+
+<Layout title="About" description={SITE.DESCRIPTION}>
+  <Container class="flex flex-col gap-y-6">
+    <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
+
+    <section>
+      <div class="min-w-full">
+        <div class="prose prose-neutral mb-8 dark:prose-invert">
+          <p class="mb-4">
+            Kami adalah kelas Sirius, disingkat Sr., nama yang kami pilih sendiri 
+            sejak 29 Maret 2019 — tanggal yang menandai lahirnya identitas kami.
+          </p>
+          <p>
+            Nama Sirius berasal dari bintang paling terang di langit malam, sekaligus 
+            mencerminkan semangat kami untuk terus bersinar dan menjadi versi terbaik dari diri sendiri. 
+            Singkatan "Sr." tidak hanya merujuk pada Sirius, tapi juga terinspirasi dari unsur kimia 
+            Stronsium (Sr) — unsur yang identik dengan cahaya merah menyala saat dibakar.
+          </p>
+        </div>
+      </div>
+    </section>
+  </Container>
+</Layout>

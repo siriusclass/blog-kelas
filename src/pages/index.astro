@@ -1,0 +1,76 @@
+---
+import BlogCard from '@/components/BlogCard.astro'
+import Container from '@/components/Container.astro'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { SITE } from '@/consts'
+import Layout from '@/layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+
+// Ambil semua postingan blog yang tidak draft
+const allPosts = (await getCollection('blog')).filter((post) => !post.data.draft)
+
+// Pisahkan highlight dan latest
+const highlightPosts = allPosts.filter((post) => post.data.highlight)
+const latestPosts = allPosts
+  .filter((post) => !post.data.highlight)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 2)
+---
+
+<Layout title="Home" description={SITE.DESCRIPTION}>
+  <Container class="flex flex-col gap-y-6">
+    
+    <section>
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-3xl">sir·​i·​us</CardTitle>
+          <CardDescription>
+            /ˈsɪrɪəs/ &bull; <span class="font-semibold">noun</span>
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p class="mb-2 text-sm text-muted-foreground">
+            a star of the constellation Canis Major that is the brightest star in the heavens.  
+          </p>
+        </CardContent>
+      </Card>
+    </section>
+
+    {highlightPosts.length > 0 && (
+      <section class="flex flex-col gap-y-4">
+        <h2 class="text-2xl font-bold">Highlight</h2>
+        <ul class="not-prose flex flex-col gap-y-4">
+          {
+            highlightPosts.map((post) => (
+              <li>
+                <BlogCard entry={post} />
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    )}
+
+    {latestPosts.length > 0 && (
+      <section class="flex flex-col gap-y-4">
+        <h2 class="text-2xl font-bold">Latest posts</h2>
+        <ul class="not-prose flex flex-col gap-y-4">
+          {
+            latestPosts.map((post) => (
+              <li>
+                <BlogCard entry={post} />
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    )}
+    
+  </Container>
+</Layout>

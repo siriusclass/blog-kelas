@@ -1,0 +1,44 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import Container from '@/components/Container.astro'
+import MemberCard from '@/components/MemberCard.astro'
+import Layout from '@/layouts/Layout.astro'
+import { type CollectionEntry, getCollection } from 'astro:content'
+
+export async function getStaticPaths() {
+  const member = await getCollection('members')
+  return member.map((member) => ({
+    params: { id: member.id },
+    props: { member },
+  }))
+}
+
+type Props = {
+  member: CollectionEntry<'members'>
+}
+
+const { member } = Astro.props
+const members = await getCollection('members')
+
+const maleMembers = members.filter((m) => m.data.gender === 'male')
+const femaleMembers = members.filter((m) => m.data.gender === 'female')
+
+---
+
+<Layout
+  title={`${member.data.name} (Member)`}
+  description={member.data.bio || `Profile of ${member.data.name}.`}
+>
+  <Container class="flex flex-col gap-y-6">
+    <Breadcrumbs
+      items={[
+        { href: '/members', label: 'Members', icon: 'lucide:users' },
+        { label: member.data.name, icon: 'lucide:user' },
+      ]}
+    />
+
+    <section>
+      <MemberCard member={member} linkDisabled />
+    </section>
+  </Container>
+</Layout>

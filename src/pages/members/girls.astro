@@ -1,0 +1,27 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Container from '@/components/Container.astro'
+import MemberCard from '@/components/MemberCard.astro'
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import { getCollection } from 'astro:content'
+
+const members = await getCollection('members')
+const femaleMembers = members.filter((m) => m.data.gender === 'female')
+---
+
+<Layout title="Girls" description="Female members of Sirius class.">
+  <Container class="flex flex-col gap-y-6">
+    <Breadcrumbs items={[{ label: 'Members', icon: 'lucide:users', href: '/members' }, { label: 'Girls' }]} />
+    {
+      femaleMembers.length > 0 ? (
+       <ul class="not-prose flex flex-col gap-4">
+          {femaleMembers.map((member) => (
+            <li><MemberCard member={member} /></li>
+          ))}
+        </ul>
+      ) : (
+        <p class="text-center text-muted-foreground">No girls found.</p>
+      )
+    }
+  </Container>
+</Layout>

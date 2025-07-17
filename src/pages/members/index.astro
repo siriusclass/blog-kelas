@@ -1,0 +1,36 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import Container from '@/components/Container.astro'
+import Layout from '@/layouts/Layout.astro'
+---
+
+<Layout title="Members" description="Sirius class member list by gender.">
+  <Container class="flex flex-col gap-y-6">
+    <Breadcrumbs items={[{ label: 'Members', icon: 'lucide:users' }]} />
+
+    <section class="text-center space-y-4">
+      <h1 class="text-2xl font-bold">Sirius Class Members</h1>
+      <p class="text-muted-foreground">
+        Browse our class members by gender category.
+      </p>
+    </section>
+
+    <section class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
+      <a
+        href="/members/boys"
+        class="block rounded-xl border p-6 text-center hover:bg-secondary transition"
+      >
+        👦 <span class="text-xl font-semibold">Sirius Boys</span>
+        <p class="text-sm text-muted-foreground mt-2">See all male members</p>
+      </a>
+
+      <a
+        href="/members/girls"
+        class="block rounded-xl border p-6 text-center hover:bg-secondary transition"
+      >
+        👧 <span class="text-xl font-semibold">Sirius Girls</span>
+        <p class="text-sm text-muted-foreground mt-2">See all female members</p>
+      </a>
+    </section>
+  </Container>
+</Layout>
