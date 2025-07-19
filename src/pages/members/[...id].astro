@@ -1,13 +1,15 @@
 ---
+import MemberCard from '@/components/MemberCard.astro'
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Container from '@/components/Container.astro'
-import MemberCard from '@/components/MemberCard.astro'
 import Layout from '@/layouts/Layout.astro'
 import { type CollectionEntry, getCollection } from 'astro:content'
+import fs from 'fs'
+import path from 'path'
 
 export async function getStaticPaths() {
-  const member = await getCollection('members')
-  return member.map((member) => ({
+  const members = await getCollection('members')
+  return members.map((member) => ({
     params: { id: member.id },
     props: { member },
   }))
@@ -18,11 +20,32 @@ type Props = {
 }
 
 const { member } = Astro.props
-const members = await getCollection('members')
 
-const maleMembers = members.filter((m) => m.data.gender === 'male')
-const femaleMembers = members.filter((m) => m.data.gender === 'female')
+// Fungsi untuk mendapatkan foto member berdasarkan pronouns
+function getMemberPhotos(memberPronouns: string): string[] {
+  const photosDir = path.join(process.cwd(), 'public', 'members', memberPronouns)
+  
+  try {
+    if (fs.existsSync(photosDir)) {
+      const files = fs.readdirSync(photosDir)
+      const imageExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif']
+      
+      return files
+        .filter(file => {
+          const ext = path.extname(file).toLowerCase()
+          return imageExtensions.includes(ext)
+        })
+        .map(file => `/members/${memberPronouns}/${file}`)
+        .sort()
+    }
+  } catch (error) {
+    console.log(`No photos found for member: ${memberPronouns}`)
+  }
+  
+  return []
+}
 
+const photos = getMemberPhotos(member.data.pronouns)
 ---
 
 <Layout
@@ -31,14 +54,43 @@ const femaleMembers = members.filter((m) => m.data.gender === 'female')
 >
   <Container class="flex flex-col gap-y-6">
     <Breadcrumbs
-      items={[
-        { href: '/members', label: 'Members', icon: 'lucide:users' },
-        { label: member.data.name, icon: 'lucide:user' },
-      ]}
-    />
+  items={[
+    { href: '/members', label: 'Members', icon: 'lucide:users' },
+    { 
+      href: `/members/${member.data.gender === 'male' ? 'boys' : 'girls'}`, 
+      label: member.data.gender === 'male' ? 'Boys' : 'Girls', 
+      icon: member.data.gender === 'male' ? 'lucide:users' : 'lucide:users' 
+    },
+    { label: member.data.name, icon: 'lucide:user' },
+  ]}
+/>
+
 
     <section>
       <MemberCard member={member} linkDisabled />
+    </section>
+
+    <!-- Photos Section -->
+    <section class="flex flex-col gap-y-4">
+      <h2 class="text-2xl font-semibold">Photos by {member.data.name}</h2>
+      {
+        photos.length > 0 ? (
+          <div class="flex flex-wrap gap-4">
+            {photos.map((photo, index) => (
+              <img 
+                src={photo} 
+                alt={`${member.data.name} - Photo ${index + 1}`}
+                class="w-40 h-40 object-cover rounded-lg shadow-md"
+                loading="lazy"
+              />
+            ))}
+          </div>
+        ) : (
+          <p class="text-muted-foreground">
+            No photos available from this member.
+          </p>
+        )
+      }
     </section>
   </Container>
 </Layout>

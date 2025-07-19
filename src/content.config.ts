@@ -47,7 +47,7 @@ const members = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/members' }),
   schema: z.object({
     name: z.string(),
-    pronouns: z.string().optional(),
+    pronouns: z.string(),
     avatar: z.string(),
     bio: z.string().optional(),
     mail: z.string().email().optional(),

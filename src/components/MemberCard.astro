@@ -37,10 +37,10 @@ const socialLinks: SocialLink[] = [
 <div
   class="overflow-hidden rounded-xl border p-4 transition-colors duration-300 ease-in-out has-[a:hover]:bg-secondary/50"
 >
-  <div class="flex flex-wrap gap-4">
+  <div class="flex items-start gap-4">
     <Link
       href={`/members/${member.id}`}
-      class={cn('block', linkDisabled && 'pointer-events-none')}
+      class={cn('block flex-shrink-0', linkDisabled && 'pointer-events-none')}
     >
       <AvatarComponent
         client:load
@@ -54,17 +54,17 @@ const socialLinks: SocialLink[] = [
         )}
       />
     </Link>
-    <div class="flex flex-grow flex-col justify-between gap-y-4">
+    <div class="flex flex-1 flex-col justify-between gap-y-3 min-w-0">
       <div>
         <div class="flex flex-wrap items-center gap-x-2">
-          <h3 class="text-lg font-semibold">{name}</h3>
+          <h3 class="text-lg font-semibold leading-tight">{name}</h3>
           {
             pronouns && (
               <span class="text-sm text-muted-foreground">({pronouns})</span>
             )
           }
         </div>
-        <p class="text-sm text-muted-foreground">{bio}</p>
+        <p class="text-sm text-muted-foreground mt-1">{bio}</p>
       </div>
       <SocialIcons links={socialLinks} />
     </div>
