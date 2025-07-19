@@ -8,23 +8,19 @@ import SocialIcons from './SocialIcons.astro'
 
 <footer class="py-4">
   <Container>
-    <div
-      class="flex flex-col items-center justify-center gap-y-2 sm:flex-row sm:justify-between"
-    >
-      <div class="flex items-center gap-x-2">
-        <span class="text-center text-sm text-muted-foreground">
+    <div class="flex items-center justify-between gap-x-2">
+      <div class="flex items-center gap-x-1 sm:gap-x-2">
+        <span class="text-xs sm:text-sm text-muted-foreground">
           &copy; {new Date().getFullYear()}
         </span>
-        <Separator orientation="vertical" className="h-4" />
-        <p class="text-center text-sm text-muted-foreground">
+        <Separator orientation="vertical" className="h-3 sm:h-4" />
+        <p class="text-xs sm:text-sm text-muted-foreground">
           Made with 🤍 by <Link
             href="https://github.com/lavarrezel"
             class="text-foreground"
             external
             underline>lavarrezel</Link
           >.
-        </p>
-        <p class="text-center text-sm text-muted-foreground">
           Awesome template by <Link
             href="https://github.com/jktrn"
             class="text-foreground"
@@ -33,7 +29,9 @@ import SocialIcons from './SocialIcons.astro'
           >.
         </p>
       </div>
-      <SocialIcons links={SOCIAL_LINKS} />
+      <div class="shrink-0">
+        <SocialIcons links={SOCIAL_LINKS} />
+      </div>
     </div>
   </Container>
 </footer>

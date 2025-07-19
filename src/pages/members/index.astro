@@ -5,31 +5,68 @@ import Layout from '@/layouts/Layout.astro'
 ---
 
 <Layout title="Members" description="Sirius class member list by gender.">
-  <Container class="flex flex-col gap-y-6">
+  <Container class="flex flex-col gap-y-8">
     <Breadcrumbs items={[{ label: 'Members', icon: 'lucide:users' }]} />
 
-    <section class="text-center space-y-4">
-      <h1 class="text-2xl font-bold">Sirius Class Members</h1>
-      <p class="text-muted-foreground">
-        Browse our class members by gender category.
+    <section class="text-center space-y-6 py-8">
+      <div class="space-y-3">
+        <h1 class="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+          Sirius Class Members
+        </h1>
+        <div class="w-24 h-1 bg-gradient-to-r from-primary to-primary/50 mx-auto rounded-full"></div>
+      </div>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+        Browse our class members by gender category and discover the amazing individuals in our community.
       </p>
     </section>
 
-    <section class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
       <a
         href="/members/boys"
-        class="block rounded-xl border p-6 text-center hover:bg-secondary transition"
+        class="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-8 text-center hover:bg-card hover:border-border hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 transform hover:-translate-y-1"
       >
-        👦 <span class="text-xl font-semibold">Sirius Boys</span>
-        <p class="text-sm text-muted-foreground mt-2">See all male members</p>
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="relative z-10">
+          <div class="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-blue-50 dark:bg-blue-500/10 group-hover:bg-blue-100 dark:group-hover:bg-blue-500/20 transition-colors duration-300">
+            <span class="text-3xl">👦</span>
+          </div>
+          <h3 class="text-2xl font-bold mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+            Sirius Boys
+          </h3>
+          <p class="text-muted-foreground group-hover:text-muted-foreground/80">
+            Discover all the amazing male members of our class
+          </p>
+          <div class="mt-4 inline-flex items-center text-sm font-medium text-primary group-hover:translate-x-1 transition-transform duration-300">
+            View Members
+            <svg class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </div>
       </a>
 
       <a
         href="/members/girls"
-        class="block rounded-xl border p-6 text-center hover:bg-secondary transition"
+        class="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-8 text-center hover:bg-card hover:border-border hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 transform hover:-translate-y-1"
       >
-        👧 <span class="text-xl font-semibold">Sirius Girls</span>
-        <p class="text-sm text-muted-foreground mt-2">See all female members</p>
+        <div class="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="relative z-10">
+          <div class="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-pink-50 dark:bg-pink-500/10 group-hover:bg-pink-100 dark:group-hover:bg-pink-500/20 transition-colors duration-300">
+            <span class="text-3xl">👧</span>
+          </div>
+          <h3 class="text-2xl font-bold mb-2 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors duration-300">
+            Sirius Girls
+          </h3>
+          <p class="text-muted-foreground group-hover:text-muted-foreground/80">
+            Discover all the amazing female members of our class
+          </p>
+          <div class="mt-4 inline-flex items-center text-sm font-medium text-primary group-hover:translate-x-1 transition-transform duration-300">
+            View Members
+            <svg class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </div>
       </a>
     </section>
   </Container>

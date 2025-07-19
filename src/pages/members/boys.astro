@@ -11,7 +11,7 @@ const maleMembers = members.filter((m) => m.data.gender === 'male')
 
 <Layout title="Boys" description="Male members of Sirius class.">
   <Container class="flex flex-col gap-y-6">
-    <Breadcrumbs items={[{ label: 'Members', href: '/members', icon: 'lucide:users' }, { label: 'Boys' }]} />
+    <Breadcrumbs items={[{ label: 'Members', href: '/members', icon: 'lucide:users' }, { label: 'Boys', icon: 'lucide:users' }]} />
     {
       maleMembers.length > 0 ? (
         <ul class="not-prose flex flex-col gap-4">

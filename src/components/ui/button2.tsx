@@ -34,32 +34,27 @@ const buttonVariants = cva(
   },
 )
 
-interface ButtonProps
-  extends React.ComponentProps<'button'>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean
-}
+// PERBAIKAN: Ubah dari function biasa ke forwardRef
+const Button = React.forwardRef<
+  HTMLButtonElement,
+  React.ComponentProps<'button'> &
+    VariantProps<typeof buttonVariants> & {
+      asChild?: boolean
+    }
+>(({ className, variant, size, asChild = false, ...props }, ref) => {
+  const Comp = asChild ? Slot : 'button'
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'button'
+  return (
+    <Comp
+      data-slot="button"
+      className={cn(buttonVariants({ variant, size, className }))}
+      ref={ref}
+      {...props}
+    />
+  )
+})
 
-    return (
-      <Comp
-        data-slot="button"
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
-    )
-  }
-)
-
+// Tambahkan displayName untuk debugging yang lebih baik
 Button.displayName = "Button"
 
-// Export terpisah untuk menghindari Fast Refresh issues
-export { buttonVariants }
-export default Button
-
-// Jika Anda perlu named export juga:
-export { Button }
+export { Button, buttonVariants }
