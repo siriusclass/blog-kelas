@@ -12,10 +12,7 @@ import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
 import { getCollection } from 'astro:content'
 
-// Ambil semua postingan blog yang tidak draft
 const allPosts = (await getCollection('blog')).filter((post) => !post.data.draft)
-
-// Pisahkan highlight dan latest
 const highlightPosts = allPosts.filter((post) => post.data.highlight)
 const latestPosts = allPosts
   .filter((post) => !post.data.highlight)
@@ -24,32 +21,33 @@ const latestPosts = allPosts
 ---
 
 <Layout title="Home" description={SITE.DESCRIPTION}>
-  <Container class="flex flex-col gap-y-6">
-    
-    <section>
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-3xl">sir·​i·​us</CardTitle>
-          <CardDescription>
-            /ˈsɪrɪəs/ &bull; <span class="font-semibold">noun</span>
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p class="mb-2 text-sm text-muted-foreground">
-            a star of the constellation Canis Major that is the brightest star in the heavens.  
-          </p>
-        </CardContent>
-      </Card>
-    </section>
+  <Container class="flex flex-col gap-y-8">
+    <!-- Header Card -->
+    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-black dark:via-neutral-900 dark:to-black p-8 shadow-sm border border-slate-200/50 dark:border-gray-800/50">
+      <div class="relative z-10">
+        <h1 class="text-3xl font-bold text-slate-900 dark:text-white">
+          sir·​i·​us
+        </h1>
+        <p class="mt-1 text-slate-600 dark:text-slate-400">
+          /ˈsɪrɪəs/ &bull; <span class="font-semibold">noun</span>
+        </p>
+        <p class="mt-4 text-sm text-slate-700 dark:text-slate-400 max-w-xl">
+          a star of the constellation Canis Major that is the brightest star in the heavens.
+        </p>
+      </div>
+    </div>
 
+    <!-- Highlight Posts -->
     {highlightPosts.length > 0 && (
       <section class="flex flex-col gap-y-4">
-        <h2 class="text-2xl font-bold">Highlight</h2>
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Highlight</h2>
         <ul class="not-prose flex flex-col gap-y-4">
           {
             highlightPosts.map((post) => (
-              <li>
-                <BlogCard entry={post} />
+              <li class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-black dark:via-neutral-900 dark:to-black shadow-sm border border-slate-200/50 dark:border-gray-800/50 hover:shadow-lg hover:border-slate-300/50 dark:hover:border-gray-700/50 transition-all duration-300">
+                <div class="relative bg-white dark:bg-transparent backdrop-blur-sm rounded-xl overflow-hidden">
+                  <BlogCard entry={post} />
+                </div>
               </li>
             ))
           }
@@ -57,20 +55,22 @@ const latestPosts = allPosts
       </section>
     )}
 
+    <!-- Latest Posts -->
     {latestPosts.length > 0 && (
       <section class="flex flex-col gap-y-4">
-        <h2 class="text-2xl font-bold">Latest posts</h2>
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Latest posts</h2>
         <ul class="not-prose flex flex-col gap-y-4">
           {
             latestPosts.map((post) => (
-              <li>
-                <BlogCard entry={post} />
+              <li class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-black dark:via-neutral-900 dark:to-black shadow-sm border border-slate-200/50 dark:border-gray-800/50 hover:shadow-lg hover:border-slate-300/50 dark:hover:border-gray-700/50 transition-all duration-300">
+                <div class="relative bg-white dark:bg-transparent backdrop-blur-sm rounded-xl overflow-hidden">
+                  <BlogCard entry={post} />
+                </div>
               </li>
             ))
           }
         </ul>
       </section>
     )}
-    
   </Container>
 </Layout>
