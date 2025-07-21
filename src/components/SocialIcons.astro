@@ -8,9 +8,10 @@ import { Icon } from 'astro-icon/components'
 interface Props {
   links: SocialLink[]
   className?: string
+  centered?: boolean
 }
 
-const { links, className } = Astro.props
+const { links, className, centered = false } = Astro.props
 
 const iconMap = {
   Website: 'lucide:globe',
@@ -31,7 +32,14 @@ const getSocialLink = ({ href, label }: SocialLink) => ({
 })
 ---
 
-<ul class={cn('not-prose flex flex-wrap gap-2', className)} role="list">
+<ul
+  class={cn(
+    'not-prose flex flex-wrap gap-2',
+    centered && 'justify-center',
+    className
+  )}
+  role="list"
+>
   {
     links.map((link) => {
       const { href, ariaLabel, iconName } = getSocialLink(link)

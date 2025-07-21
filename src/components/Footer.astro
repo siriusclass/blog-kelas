@@ -4,33 +4,26 @@ import { Separator } from '@/components/ui/separator'
 import { SOCIAL_LINKS } from '@/consts'
 import Link from './Link.astro'
 import SocialIcons from './SocialIcons.astro'
+
+const currentYear = new Date().getFullYear();
 ---
 
-<footer class="py-4">
+<footer class="mt-auto w-full border-t border-border bg-background">
   <Container>
-    <div class="flex items-center justify-between gap-x-2">
-      <div class="flex items-center gap-x-1 sm:gap-x-2">
-        <span class="text-xs sm:text-sm text-muted-foreground">
-          &copy; {new Date().getFullYear()}
-        </span>
-        <Separator orientation="vertical" className="h-3 sm:h-4" />
-        <p class="text-xs sm:text-sm text-muted-foreground">
-          Made with 🤍 by <Link
-            href="https://github.com/lavarrezel"
-            class="text-foreground"
-            external
-            underline>lavarrezel</Link
-          >.
-          Awesome template by <Link
-            href="https://github.com/jktrn"
-            class="text-foreground"
-            external
-            underline>enscribe</Link
-          >.
-        </p>
+    <div class="flex flex-col items-center justify-between py-6 sm:flex-row-reverse sm:py-4">
+      <!-- Social Icons -->
+      <div class="mb-2 sm:mb-0">
+        <SocialIcons links={SOCIAL_LINKS} centered />
       </div>
-      <div class="shrink-0">
-        <SocialIcons links={SOCIAL_LINKS} />
+
+      <!-- Copyright + Info -->
+      <div class="flex flex-col items-center text-xs text-muted-foreground sm:flex-row">
+        <span>&copy; {currentYear}</span>
+        <span class="hidden sm:inline px-2">|</span>
+        <p class="text-center sm:text-left">
+          Made with 🤍 by <Link href="https://github.com/lavarrezel" class="text-foreground" external underline>lavarrezel</Link>.
+          Template by <Link href="https://github.com/jktrn" class="text-foreground" external underline>enscribe</Link>.
+        </p>
       </div>
     </div>
   </Container>

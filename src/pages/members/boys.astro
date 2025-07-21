@@ -10,18 +10,73 @@ const maleMembers = members.filter((m) => m.data.gender === 'male')
 ---
 
 <Layout title="Boys" description="Male members of Sirius class.">
-  <Container class="flex flex-col gap-y-6">
-    <Breadcrumbs items={[{ label: 'Members', href: '/members', icon: 'lucide:users' }, { label: 'Boys', icon: 'lucide:users' }]} />
+  <Container class="flex flex-col gap-y-8">
+    <!-- Header Section -->
+    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-black dark:via-neutral-900 dark:to-black p-8 shadow-sm border border-slate-200/50 dark:border-gray-800/50">
+      <div class="relative z-10">
+        <Breadcrumbs items={[{ label: 'Members', href: '/members', icon: 'lucide:users' }, { label: 'Boys', icon: 'lucide:users' }]} />
+        <div class="mt-4">
+          <h1 class="text-3xl font-bold text-slate-900 dark:text-white">
+            Boys Members
+          </h1>
+          <p class="mt-2 text-slate-600 dark:text-slate-400 max-w-2xl">
+            Meet the talented boys from our Sirius class. Each member brings their unique skills, personality, and passion to our community.
+          </p>
+          {maleMembers.length > 0 && (
+            <div class="mt-4 flex items-center gap-2 text-sm text-slate-500 dark:text-slate-500">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span>{maleMembers.length} {maleMembers.length === 1 ? 'boy' : 'boys'} found</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <!-- Members List -->
     {
       maleMembers.length > 0 ? (
-        <ul class="not-prose flex flex-col gap-4">
-          {maleMembers.map((member) => (
-            <li><MemberCard member={member} /></li>
-          ))}
-        </ul>
+        <div class="relative">
+          <ul class="not-prose flex flex-col gap-6">
+            {maleMembers.map((member, index) => (
+              <li 
+                class="group transform transition-all duration-500 ease-out hover:scale-[1.01] relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-black dark:via-neutral-900 dark:to-black shadow-sm border border-slate-200/50 dark:border-gray-800/50 hover:shadow-lg hover:border-slate-300/50 dark:hover:border-gray-700/50"
+                style={`animation: fadeInLeft 0.6s ease-out ${index * 0.1}s both`}
+              >
+                <div class="relative bg-white dark:bg-transparent backdrop-blur-sm overflow-hidden rounded-xl">
+                  <MemberCard member={member} />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       ) : (
-        <p class="text-center text-muted-foreground">No boys found.</p>
+        <div class="text-center py-16 px-8">
+          <div class="mx-auto w-24 h-24 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-black dark:to-neutral-900 rounded-full flex items-center justify-center mb-6 shadow-inner">
+            <svg class="w-10 h-10 text-slate-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2">No Boys Found</h3>
+          <p class="text-slate-600 dark:text-slate-400 max-w-md mx-auto">
+            There are currently no boys registered in our Sirius class. Check back later or contact administration for more information.
+          </p>
+        </div>
       )
     }
   </Container>
+
+  <style>
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  </style>
 </Layout>

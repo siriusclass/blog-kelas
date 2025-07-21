@@ -3,26 +3,32 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Container from '@/components/Container.astro'
 import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
+import { Icon } from 'astro-icon/components'
 ---
 
 <Layout title="About" description={SITE.DESCRIPTION}>
   <Container class="flex flex-col gap-y-6">
     <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
 
-    <section>
-      <div class="min-w-full">
-        <div class="prose prose-neutral mb-8 dark:prose-invert">
-          <p class="mb-4 text-justify">
-            Kami adalah kelas Sirius, disingkat Sr., nama yang kami pilih sendiri 
-            sejak 29 Maret 2019 — tanggal yang menandai lahirnya identitas kami.
-          </p>
-          <p class="text-justify">
-            Nama Sirius berasal dari bintang paling terang di langit malam, sekaligus 
-            mencerminkan semangat kami untuk terus bersinar dan menjadi versi terbaik dari diri sendiri. 
-            Singkatan "Sr." tidak hanya merujuk pada Sirius, tapi juga terinspirasi dari unsur kimia 
-            Stronsium (Sr) — unsur yang identik dengan cahaya merah menyala saat dibakar.
-          </p>
-        </div>
+    <section class="w-full">
+      <div class="flex items-center gap-3 mb-4">
+        <Icon name="lucide:star" class="text-white-500 dark:text-white-400 size-6" />
+        <h1 class="text-2xl font-semibold tracking-tight">Tentang Sirius</h1>
+      </div>
+
+      <div class="prose prose-neutral dark:prose-invert text-justify animate-fade-in">
+        <p>
+          Kami adalah kelas <strong>Sirius</strong>, disingkat <strong>Sr.</strong>, 
+          nama yang kami pilih sendiri sejak <strong>29 Maret 2019</strong> — 
+          tanggal yang menandai lahirnya identitas kami.
+        </p>
+        <p>
+          Nama <strong>Sirius</strong> berasal dari bintang paling terang di langit malam, 
+          sekaligus mencerminkan semangat kami untuk terus bersinar dan menjadi versi terbaik dari diri sendiri.
+          Singkatan "<strong>Sr.</strong>" tidak hanya merujuk pada Sirius, 
+          tapi juga terinspirasi dari unsur kimia <strong>Stronsium (Sr)</strong> — 
+          unsur yang identik dengan cahaya merah menyala saat dibakar.
+        </p>
       </div>
     </section>
   </Container>
