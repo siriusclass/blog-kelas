@@ -1,0 +1,16 @@
+---
+// Props opsional: id playlist, tinggi, tema
+const { id, height = 352 } = Astro.props
+---
+
+<div class="w-full overflow-hidden rounded-xl shadow">
+  <iframe
+    src={`https://open.spotify.com/embed/playlist/${id}?utm_source=generator`}
+    width="100%"
+    height={height}
+    style="border-radius:12px"
+    frameborder="0"
+    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+    loading="lazy"
+  ></iframe>
+</div>
